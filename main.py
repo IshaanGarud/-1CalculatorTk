@@ -5,12 +5,12 @@ Try it out for yourself by doing 2+2.
 
 I dunno about Copyright....
 still , Inu©
-
 """
 
 
 from tkinter import *
 import tkinter.font as font
+import math
 
 root = Tk()
 root.title("First GUI Calculator project by Inu :)")
@@ -70,8 +70,15 @@ def Pow():
     answer["text"] = a**b
     answer["fg"], answer["font"] = "black", "TkDefaultFont"
 
-      
-        
+def Abs():
+    a = float(inp1.get())
+    #b = int(inp2.get())
+    answer["text"] = abs(a)
+
+"""def Sine():
+    a = int(inp1.get())
+    answer["text"] = math.sin(a)"""
+              
 
 b_add = Button(root, text="+", command=Add, bg="grey")
 b_sub = Button(root, text="-", command=Sub, bg="grey")
@@ -79,6 +86,8 @@ b_mul = Button(root, text="×", command=Mul, bg="grey")
 b_div = Button(root, text="÷", command=Div, bg="grey")
 b_root = Button(root, text="√", command=Root, bg="grey")
 b_power = Button(root, text="^", command=Pow, bg="grey")
+#b_sine = Button(root, text="sin(a)", command=Sine, bg="lime")
+b_Abs = Button(root, text="absolute(No.1)", command=Abs, bg="orange")
 
 label1.grid(row=1, column=0)
 inp1.grid(row=1, column=1)
@@ -91,8 +100,11 @@ b_mul.grid(row=4, column=0)
 b_div.grid(row=4, column=1)
 b_root.grid(row=5, column=0)
 b_power.grid(row=5, column=1)
+b_Abs.grid(row=6, column=0)
+#b_sine.grid(row=6, column=0)
 
-answer.grid(row=6, column=0)
+
+answer.grid(row=10, column=0)
  
 # ----------------------------------------------------------------                       
 
