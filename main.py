@@ -32,53 +32,81 @@ label2 = Label(root, text="Second Number:- ")
 inp2 = Entry(root)
 
 answer = Label()
+wisdom = Label()
 
-def intelligence(a, b):
+def NullSafe(n1, n2):
+    try:
+        num1 = int(inp1.get())
+    except:
+        num1 = n1
+        
+    try:
+        num2 = int(inp2.get())
+    except:       
+        num2 = n2
+    return num1, num2
+
+def intelligence(a, b, res):
     if a<10 or b<10:
         answer["text"], answer["fg"], answer["font"] = "Woah Man yo Serious?,\n You can't do that simple shit?", "red", headfont
     else:
         answer["fg"] = "black"
         answer["font"] ="TkDefaultFont"
-    
+
+def Noice(res):
+    if res==69 or res==420 or res==80085:
+        answer["text"] = res, "Nice ಠ◡ಠ"   
+
+                
 def Add():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a+b
-    intelligence(a, b)    
+    a, b = NullSafe(0, 0)
+    answer["text"] = result = a+b
+    Noice(result)
+    #intelligence(a, b, result)   
 def Sub():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a-b
-    intelligence(a, b)   
+    a, b = NullSafe(0, 0)
+    answer["text"] = result = a-b
+    Noice(result)
+    #intelligence(a, b, result)   
 def Mul():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a*b
-    intelligence (a, b)    
+    a, b = NullSafe(1, 1)
+    answer["text"] = result = a*b
+    Noice(result)
+    #intelligence (20, 20, result)    
 def Div():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a/b
-    intelligence (a, b)
+    a, b = NullSafe(0, 1)
+    answer["text"] = result = a/b
+    Noice(result)
+    #intelligence (20, 20, result)
 def Root():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a**(1/b)
+    a, b = NullSafe(0, 2)
+    answer["text"] = result = a**(1/b)
     answer["fg"], answer["font"] = "black", "TkDefaultFont"
+    Noice(result)
 def Pow():
-    a = int(inp1.get())
-    b = int(inp2.get())
-    answer["text"] = a**b
+    a, b = NullSafe(0, 1)
+    answer["text"] = result = a**b
     answer["fg"], answer["font"] = "black", "TkDefaultFont"
+    Noice(result)
+    #intelligence (20, 20, result)
 def Abs():
-    a = float(inp1.get())
+    a, b = NullSafe(0, 0)
     #b = int(inp2.get())
-    answer["text"] = abs(a)
+    answer["text"] = result = abs(a)
+    Noice(result)
+    #intelligence (20, 20, result)
 def GeoMean():
-    a = int(inp1.get())
-    b = int(inp2.get())
+    a, b = NullSafe(1, 1)
     mean = (a*b)
-    answer["text"] = mean**0.5
+    answer["text"] = result = mean**0.5
+    Noice(result)
+    #intelligence (20, 20, result)
+def SumUp():
+    a, b = NullSafe(0, 0) 
+    answer["text"] = result = ((a*(a+1))//2) - ((b*(b+1))//2)
+    Noice(result)
+    #intelligence (20, 20, result)
+
 
 """def Sine():
     a = int(inp1.get())
@@ -94,7 +122,7 @@ b_power = Button(root, text="^", command=Pow, bg="grey")
 #b_sine = Button(root, text="sin(a)", command=Sine, bg="lime")
 b_abs = Button(root, text="absolute(No.1)", command=Abs, bg="orange")
 b_geomean = Button(root, text="geo_mean", command=GeoMean, bg="orange")
-
+b_sumUp = Button(root, text="Σ", command=SumUp, bg="lime")
 
 label1.grid(row=1, column=0)
 inp1.grid(row=1, column=1)
@@ -110,11 +138,25 @@ b_power.grid(row=5, column=1)
 b_abs.grid(row=6, column=0)
 #b_sine.grid(row=6, column=0)
 b_geomean.grid(row=6, column=1)
+b_sumUp.grid(row=7, column=0)
 
 
 answer.grid(row=10, column=0)
  
 # ----------------------------------------------------------------                       
 
-
 root.mainloop()
+
+
+
+#++++++++++++++++
+""" Code for Null Safety:
+    try:
+        a = int(inp1.get())
+    except: 
+        a = 0  
+    try:
+        b = int(inp2.get())   
+    except:
+        b = 0 
+"""
