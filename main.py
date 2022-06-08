@@ -8,18 +8,14 @@ still , Inu©
 
 """
 
-
 from tkinter import *
 import tkinter.font as font
 import math
-import time
 from time import strftime
  
-
 root = Tk()
 root.title("First GUI Calculator project by Inu :)")
 root.geometry("690x1485")
-
 
 headfont = font.Font(family="Comic Sans", size=8, weight="bold")
 headline = Label(root,
@@ -37,27 +33,28 @@ inp2 = Entry(root)
 
 answer = Label()
 wisdom = Label()
-
+an_mode = "Deg"
+f_mode = "normal"
 
 #---------------Clock/Watch-----------------------------
 clock = Label(fg="green", font=headfont, bg="#BFFF00")   
 def time():
-    string = strftime('%H:%M:%S %p')
+    
+    string = strftime('%H:%M:%S %p')       
     clock.config(text = string)                             
     clock.after(1000, time)
  
 clock.grid(row=0, column=1)
 time()
 
-
 #--------*Extra Functions*------------------------------------
 def NullSafe(n1, n2):
     try:
-        num1 = int(inp1.get())
+        num1 = float(inp1.get())
     except:
         num1 = n1       
     try:
-        num2 = int(inp2.get())
+        num2 = float(inp2.get())
     except:       
         num2 = n2
     return num1, num2
@@ -71,8 +68,7 @@ def intelligence(a, b, res):
 
 def Noice(res):
     if res==69 or res==420 or res==80085:
-        answer["text"] = res, "Nice ಠ◡ಠ"   
-
+        answer["text"] = "%d Nice ಠ◡ಠ" % res
 
 #-----------Main_Logic---------------------------------                
 def Add():
@@ -127,9 +123,72 @@ def Factorial():
     a, b = NullSafe(0, 0)
     answer["text"] = result = (math.factorial(a))
     Noice(result)
-
+    
+def Deg_Rad():
+    global an_mode
+    an_mode = "Deg"
+    if b_deg_rad["text"] == "Deg":
+        b_deg_rad["text"] = "Rad"
+        an_mode = "Rad"
+        
+    elif b_deg_rad["text"] == "Rad":
+        b_deg_rad["text"] = "Deg"
+        an_mode = "Deg"
+ 
+def Change():
+     global f_mode
+     if f_mode == "normal":
+        f_mode = "inverse"
+        b_sine["text"] = "arcsin(a)"
+        b_cosine["text"] = "arccos(a)"
+        b_tangent["text"] = "arctan(a)"
+        
+     elif f_mode == "inverse":
+        f_mode = "normal"  
+        b_sine["text"] = "sin(a)"
+        b_cosine["text"] = "cos(a)"
+        b_tangent["text"] = "tan(a)"
+        
+def Sine():
+    a = int(inp1.get())
+    if f_mode == "normal":  
+        if an_mode == "Deg":
+            answer["text"] = math.sin(math.radians(a))
+        elif an_mode == "Rad":
+            answer["text"] = math.sin(a)
+                     
+    if f_mode == "inverse":
+            answer["text"] = math.asin(math.radians(a))  
+             
+def Cosine():
+    a = int(inp1.get())
+    if f_mode == "normal":  
+        if an_mode == "Deg":
+            answer["text"] = math.cos(math.radians(a))
+        elif an_mode == "Rad":
+            answer["text"] = math.cos(a)
+                     
+    if f_mode == "inverse":
+            answer["text"] = math.acos(math.radians(a))  
+    
+def Tangent():
+    a = int(inp1.get())
+    if f_mode == "normal":  
+        if an_mode == "Deg":
+            answer["text"] = math.tan(math.radians(a))
+        elif an_mode == "Rad":
+            answer["text"] = math.tan(a)
+                     
+    if f_mode == "inverse":
+            answer["text"] = math.atan(math.radians(a)) 
+            
+def Clear():
+    inp1.delete(0, END)   
+    inp2.delete(0, END) 
+    answer["text"] = ""
               
 #-------------*Buttons*---------------------------------
+b_clear = Button(root, text="C", command=Clear, bg="white", fg="red")
 b_add = Button(root, text="+", command=Add, bg="grey")
 b_sub = Button(root, text="-", command=Sub, bg="grey")
 b_mul = Button(root, text="×", command=Mul, bg="grey")
@@ -140,8 +199,11 @@ b_abs = Button(root, text="absolute(No.1)", command=Abs, bg="orange")
 b_geomean = Button(root, text="geo_mean", command=GeoMean, bg="orange")
 b_sumUp = Button(root, text="Σ", command=SumUp, bg="lime")
 b_factorial = Button(root, text="(Number1)!", command=Factorial, bg="lime")
-
-
+b_deg_rad = Button(root, text="Deg", command=Deg_Rad)
+b_f_mode = Button(root, text="\u21c6", command=Change)
+b_sine = Button(root, text="sin(a)", command=Sine, bg="#CBC3E3")
+b_cosine = Button(root, text="cosine(a)", command=Cosine, bg="#CBC3E3")
+b_tangent = Button(root, text="tangent(a)", command=Tangent, bg="#CBC3E3")
 
 #---------*Setting_Buttons & Text*-----------------------------------------
 label1.grid(row=1, column=0)
@@ -159,35 +221,19 @@ b_abs.grid(row=6, column=0)
 b_geomean.grid(row=6, column=1)
 b_sumUp.grid(row=7, column=0)
 b_factorial.grid(row=7, column=1)
+b_f_mode.grid(row=8, column=1)
+b_deg_rad.grid(row=8, column=0)
+b_sine.grid(row=9, column=0)
+b_cosine.grid(row=9, column=1)
+b_tangent.grid(row=10, column=0)
 
-answer.grid(row=10, column=0)
+b_clear.grid(row=11, column=0)
+answer.grid(row=100, column=0)
  
  
 # ----------------------------------------------------------------                       
 
 root.mainloop()
-
-
-"""def Sine():
-    a = int(inp1.get())
-    temp = math.sin(a)
-    answer["text"] = math.degrees(temp)
-def Cosine():
-    a = int(inp1.get())
-    answer["text"] = math.cos(a)
-def Tangent():
-    a = int(inp1.get())
-    answer["text"] = math.tan(a)"""
-
-
-#b_sine = Button(root, text="sin(a)", command=Sine, bg="#CBC3E3")
-#b_cosine = Button(root, text="cosine(a)", command=Cosine, bg="#CBC3E3")
-#b_tangent = Button(root, text="tangent(a)", command=Tangent, bg="#CBC3E3")
-
-
-#b_sine.grid(row=8, column=0)
-#b_cosine.grid(row=8, column=1)
-#b_tangent.grid(row=9, column=0)
 
 
 #++++++++++++++++
